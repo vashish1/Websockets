@@ -18,6 +18,10 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func wsEndpoint(w http.ResponseWriter, r *http.Request) {
+	r.Header.Set("Connection","upgrade")
+	r.Header.Set("Upgrade","websocket")
+	r.Header.Set("Sec-Websocket-Version", "13")
+	// r.Header.Set("Sec-Websocket-Key","1f76f2njy68yhb75ft7")
 		upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 
 	conn, err := upgrader.Upgrade(w, r, nil)
